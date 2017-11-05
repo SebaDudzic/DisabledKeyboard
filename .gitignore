@@ -1,0 +1,12 @@
+*.suo
+Library/
+Temp/
+*.sln
+*.csproj
+Temp/
+Library/
+Assets/Temp.meta
+Assets/Scripts/CommonResources/DBs/CustomDBs.meta
+Assets/Prefabs/Globals.meta
+Assets/Plugins.meta
+.vs/
