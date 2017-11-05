@@ -16,4 +16,10 @@ public class InputObject_Base : MonoBehaviour
     {
         RunCommand();
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("colenter" + gameObject.name, gameObject);
+        RunCommand();
+    }
 }
