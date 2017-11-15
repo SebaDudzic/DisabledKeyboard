@@ -33,7 +33,7 @@ public class TextController : MonoBehaviour, ITextControllerInput
             switch (command)
             {
                 case TextControllerCommand.Write:
-                    Write((char)optionalParams[0]);
+                    Write((string)optionalParams[0]);
                     break;
                 case TextControllerCommand.Backspace:
                     Backspace();
@@ -56,7 +56,7 @@ public class TextController : MonoBehaviour, ITextControllerInput
         textDrawer.RefreshText(text);
     }
 
-    private void Write(char character)
+    private void Write(string character)
     {
         text += character;
     }
