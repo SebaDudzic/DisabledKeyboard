@@ -30,14 +30,14 @@ public class LettersSpawner : MonoBehaviour
             {
                 InputObject_WriteChar inputObject = newLetter.AddComponent<InputObject_WriteChar>();
                 inputObject.SetCharacter(LETTERS[i]);
-                inputObject.SetCommantType(TextControllerCommand.Write);
+                inputObject.SetCommandType(TextControllerCommand.Write);
                 inputObject.RefreshTextRotation();
             }
             else
             {
                 InputObject_Base inputObject = newLetter.AddComponent<InputObject_Base>();
                 inputObject.SetCharacter(LETTERS[i]);
-                inputObject.SetCommantType(TextControllerCommand.Backspace);
+                inputObject.SetCommandType(TextControllerCommand.Backspace);
                 inputObject.RefreshTextRotation();
             }
             
