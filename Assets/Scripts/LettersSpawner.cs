@@ -5,14 +5,25 @@ using UnityEngine;
 public class LettersSpawner : MonoBehaviour
 {
 
-    private readonly string[] LETTERS = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z", "<" };
+    private readonly string[] LETTERS = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z", "<", "_" };
 
     [SerializeField] private GameObject letterPrefab;
     [SerializeField] private float radius;
 
+    void Awake()
+    {
+        SpawnKeyboard();
+    }
+
     [ContextMenu("Spawn")]
     public void SpawnKeyboard()
     {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            Destroy(child.gameObject);
+        }
+
         float degreesOffset = 360.0f / LETTERS.Length;
         for (int i = 0; i < LETTERS.Length; i++)
         {
@@ -40,10 +51,7 @@ public class LettersSpawner : MonoBehaviour
                 inputObject.SetCommandType(TextControllerCommand.Backspace);
                 inputObject.RefreshTextRotation();
             }
-            
-
         }
-
     }
 
 }

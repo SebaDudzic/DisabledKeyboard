@@ -14,12 +14,27 @@ public class InputObject_Base : MonoBehaviour
 
     private bool isPressed = false;
     private DateTime timeEntered;
+    private float pressTime = 0;
 
     private void Awake()
     {
         startScale = transform.localScale;
         textMesh = GetComponentInChildren<TextMesh>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (isPressed && (DateTime.UtcNow - timeEntered).TotalSeconds >= Settings.Instance.holdButtonTime)
+        {
+            if (pressTime > Settings.Instance.holdSpan)
+            {
+                OnRunCommand();
+                pressTime = 0;
+            }
+
+            pressTime += Time.deltaTime;
+        }
     }
 
     protected virtual void RunCommand()
@@ -36,6 +51,7 @@ public class InputObject_Base : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         isPressed = true;
+        pressTime = Mathf.Infinity;
         timeEntered = DateTime.UtcNow;
         OnRunCommand();
     }
@@ -43,7 +59,6 @@ public class InputObject_Base : MonoBehaviour
     private void OnTriggerExit(Collider collider)
     {
         isPressed = false;
-        OnRunCommand();
     }
 
     public void SetCommandType(TextControllerCommand commandType)
