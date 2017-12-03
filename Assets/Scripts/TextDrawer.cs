@@ -6,6 +6,13 @@ using UnityEngine;
 public class TextDrawer : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI textMesh;
+    [SerializeField] private TextMeshProUGUI sentTextMesh;
+
+    public void SendText()
+    {
+        sentTextMesh.text = "Sent:\n" + textMesh.text;
+        textMesh.text = "";
+    }
 
     public void RefreshText(string newText)
     {

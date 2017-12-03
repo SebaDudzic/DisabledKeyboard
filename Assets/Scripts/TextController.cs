@@ -38,6 +38,9 @@ public class TextController : MonoBehaviour, ITextControllerInput
                 case TextControllerCommand.Backspace:
                     Backspace();
                     break;
+                case TextControllerCommand.Enter:
+                    SendText();
+                    break;
                 default:
                     Debug.LogError("Not recognized command!");
                     break;
@@ -54,6 +57,15 @@ public class TextController : MonoBehaviour, ITextControllerInput
     private void RefreshText()
     {
         textDrawer.RefreshText(text);
+    }
+
+    private void SendText()
+    {
+        if (text != "")
+        {
+            textDrawer.SendText();
+            text = "";
+        }
     }
 
     private void Write(string character)

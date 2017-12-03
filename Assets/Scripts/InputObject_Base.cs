@@ -8,19 +8,19 @@ public class InputObject_Base : MonoBehaviour
     [SerializeField] protected string character;
     [SerializeField] protected TextControllerCommand command;
 
-    protected TextMesh textMesh;
-    private Vector3 startScale;
-    private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer { get { return GetComponentInChildren<SpriteRenderer>(); } }
+    protected TextMesh textMesh { get {  return GetComponentInChildren<TextMesh>(); } }
+    private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
 
+    private Vector3 startScale;
+    private bool hasIcon = false;
     private bool isPressed = false;
     private DateTime timeEntered;
     private float pressTime = 0;
 
     private void Awake()
     {
-        startScale = transform.localScale;
-        textMesh = GetComponentInChildren<TextMesh>();
-        audioSource = GetComponent<AudioSource>();
+        startScale = transform.localScale;  
     }
 
     private void Update()
@@ -74,13 +74,20 @@ public class InputObject_Base : MonoBehaviour
 
     protected void RefreshText()
     {
-        textMesh = GetComponentInChildren<TextMesh>();
         textMesh.text = character;
     }
 
     public void RefreshTextRotation()
     {
         textMesh.transform.rotation = Quaternion.identity;
+    }
+
+    public void SetIcon(Sprite iconSprite)
+    {
+        spriteRenderer.sprite = iconSprite;
+        hasIcon = true;
+        textMesh.gameObject.SetActive(false);
+        spriteRenderer.enabled = true;
     }
 
     private void OnRunCommand()
@@ -113,8 +120,18 @@ public class InputObject_Base : MonoBehaviour
     private void SetAnimationPhase(float phase)
     {
         transform.localScale = startScale * Settings.Instance.buttonScaleCurve.Evaluate(phase);
-        textMesh.color = Color.Lerp(Color.white, Settings.Instance.pressedColor,
+        Color color = Color.Lerp(Color.white, Settings.Instance.pressedColor,
             Settings.Instance.colorCurve.Evaluate(phase));
+
+        if (!hasIcon)
+        {
+            textMesh.color = color;
+        }
+        else
+        {
+            spriteRenderer.color = color;
+        }
+
     }
 
     private void PlaySound()

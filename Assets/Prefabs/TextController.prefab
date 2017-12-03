@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 0}
+  sentTextMesh: {fileID: 0}
 --- !u!114 &114875218006755370
 MonoBehaviour:
   m_ObjectHideFlags: 1
