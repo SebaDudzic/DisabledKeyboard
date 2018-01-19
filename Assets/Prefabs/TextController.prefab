@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4384488585235554}
   - component: {fileID: 114875218006755370}
   - component: {fileID: 114514969821846540}
+  - component: {fileID: 114575518023167228}
   m_Layer: 0
   m_Name: TextController
   m_TagString: Untagged
@@ -54,6 +55,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 0}
   sentTextMesh: {fileID: 0}
+--- !u!114 &114575518023167228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1051239381580112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fb2523f095e3d4eb2c5a5c8948c4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastCpmText: {fileID: 0}
 --- !u!114 &114875218006755370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,3 +78,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d0666ea6d01504ca04953b8a5d978d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counter: {fileID: 114575518023167228}

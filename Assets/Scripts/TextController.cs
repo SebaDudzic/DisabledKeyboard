@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(TextDrawer))]
 public class TextController : MonoBehaviour, ITextControllerInput
 {
+    [SerializeField] private CPMCounter counter;
+
     public static ITextControllerInput Input;
 
     private TextDrawer textDrawer;
@@ -34,12 +36,14 @@ public class TextController : MonoBehaviour, ITextControllerInput
             {
                 case TextControllerCommand.Write:
                     Write((string)optionalParams[0]);
+                    counter.OnTyped();
                     break;
                 case TextControllerCommand.Backspace:
                     Backspace();
                     break;
                 case TextControllerCommand.Enter:
                     SendText();
+                    counter.OnSend();
                     break;
                 default:
                     Debug.LogError("Not recognized command!");
